@@ -83,6 +83,7 @@ void HC::Commit(int fps)
 		SDL_Delay((1000/fps)-timerFPS);
 	SDL_RenderPresent(rende);
 	lastFrame=SDL_GetTicks();
+	SDL_RenderClear(rende);
 }
 
 int HC::CalcFps()

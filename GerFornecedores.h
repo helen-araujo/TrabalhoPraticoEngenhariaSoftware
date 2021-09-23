@@ -1,24 +1,24 @@
 #pragma once
 #include "HCSGE.h"
-#include <fstream>
+#include<iostream>
 
-using namespace std;
 
-class GerEstoque
-{
+
+class GerFornecedor{
 	private:
+	string arq;
 	int font, font1, bot;
 	HC* Engine;
-	HC_Botao bts[3];
+	HC_Botao botao[3];
 	bool par;
-	vector<string>estoquetemp;
+	vector<string>listaFornecedor;
 	
 	public:
-	GerEstoque(HC*engine);
-	~GerEstoque();
+	GerFornecedor(HC*engine);
 	void telaprinc();
 	int input();
 	void Adicionar();
 	void Remover();
 	void Exibir();
+	//void exibir()
 };

@@ -11,7 +11,18 @@ GerEstoque::GerEstoque(HC* engine)
 	file.open("estoque.txt");
 	string t;
 	while (getline(file, t))
-		arq += t + '\n';
+		estoquetemp.push_back(t);
+	file.close();
+}
+
+GerEstoque::~GerEstoque()
+{
+	ofstream file;
+	file.open("estoque.txt", ofstream::trunc);
+	string aux;
+	for(int i=0; i<estoquetemp.size(); i++)
+		aux+=estoquetemp[i]+'\n';
+	file<<aux;
 	file.close();
 }
 
@@ -30,6 +41,13 @@ void GerEstoque::telaprinc()
 		bts[1].setDest(580, 255);
 		Engine->Desenhar(true, 120, 50, 580, 255, 255, 0, 0, 255);
 		Engine->Desenhar("Remover do estoque", font1, 582, 275, 255, 255, 255);
+		
+		bts[2]=Engine->CriarBtn(120, 50);
+		bts[2].setDest(580, 310);
+		Engine->Desenhar(true, 120, 50, 580, 310, 255, 0, 0, 255);
+		Engine->Desenhar("Exibir o estoque", font1, 582, 330, 255, 255, 255);
+		
+		Engine->Desenhar("(clique em qualquer lugar para voltar)", font1, 440, 40, 0, 0, 0);
 	
 		Engine->Commit(60);
 
@@ -47,6 +65,9 @@ void GerEstoque::telaprinc()
 			case 1:
 				Remover();
 				break;
+			case 2:
+				Exibir();
+				break;
 		}
 	}
 }
@@ -59,7 +80,7 @@ void GerEstoque::Adicionar()
 	int quant;
 	string nome;
 	cin>>quant>>nome;
-	estoquetemp.push_back(to_string(quant)+nome);
+	estoquetemp.push_back(to_string(quant)+' '+nome);
 }
 
 void GerEstoque::Remover()
@@ -70,6 +91,18 @@ void GerEstoque::Remover()
 	int aux;
 	cin>>aux;
 	estoquetemp.erase(estoquetemp.begin()+(aux-1));
+}
+
+void GerEstoque::Exibir()
+{
+	Engine->SetBackground(255, 255, 255, 255);
+	Engine->Desenhar("(clique para voltar)", font1, 440, 40, 0, 0, 0);
+	for(int i=0; i<estoquetemp.size(); i++)
+		Engine->Desenhar(estoquetemp[i], font, 440, 140+(20*i), 0, 0, 0);
+	Engine->Commit(60);
+	while (1)
+		if (input()==3)
+			break;
 }
 
 int GerEstoque::input()
@@ -94,11 +127,19 @@ int GerEstoque::input()
 					par=false;
 					return 0;
 				}
-				if((asc[1]==1)&&bts[1].Sobre())
+				
+				else if((asc[1]==1)&&bts[1].Sobre())
 				{
 					par=false;
 					return 1;
 				}
+				
+				else if((asc[1]==1)&&bts[2].Sobre())
+				{
+					par=false;
+					return 2;
+				}
+				else return 3;
 				break;
 		}
 	}while(asc[0]!=0);
