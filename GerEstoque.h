@@ -21,4 +21,8 @@ class GerEstoque
 	void Adicionar();
 	void Remover();
 	void Exibir();
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> c8d0f23dd6c7c6d21cb0643bdc5e4904535ff211

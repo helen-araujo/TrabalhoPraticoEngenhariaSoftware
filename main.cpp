@@ -1,7 +1,11 @@
 #include "HCSGE.h"
 #include "GerEstoque.h"
+<<<<<<< HEAD
 #include "GerFornecedores.h"
 
+=======
+#include <iostream>
+>>>>>>> c8d0f23dd6c7c6d21cb0643bdc5e4904535ff211
 
 using namespace std;
 
@@ -80,9 +84,13 @@ void input()
 				
 				else if((asc[1]==1)&&bts[2].Sobre())
 				{
+<<<<<<< HEAD
 					GerFornecedor TelaFornecedor(&Engine);
 					TelaFornecedor.telaprinc();
 					aux=false;
+=======
+					return;
+>>>>>>> c8d0f23dd6c7c6d21cb0643bdc5e4904535ff211
 				}
 				else if((asc[1]==1)&&bts[3].Sobre())
 				{
@@ -91,4 +99,8 @@ void input()
 				break;
 		}
 	}while(asc[0]!=0);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> c8d0f23dd6c7c6d21cb0643bdc5e4904535ff211
